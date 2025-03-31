@@ -1,0 +1,21 @@
+volumes:
+  mysql8:
+    name: mysql8
+    external: true
+
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: asdf
+      MYSQL_DATABASE: medical-crm
+    volumes:
+      - mysql8:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 777:8080
