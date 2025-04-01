@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Models\Users;
+namespace App\Enums\Models\Attributes;
 
 enum AttributeDefinitionType: string
 {

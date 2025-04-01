@@ -2,6 +2,7 @@
 
 namespace App\Models\Users;
 
+use App\Models\Attributes\AttributeDefinitionOption;
 use App\Models\Base;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
