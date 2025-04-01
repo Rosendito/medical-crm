@@ -12,8 +12,8 @@ class DocumentType extends Base
      * @var list<string>
      */
     protected $fillable = [
-        'name',
         'country_code',
+        'name',
         'regex_pattern',
         'requires_expiration',
     ];

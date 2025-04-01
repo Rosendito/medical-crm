@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Models\Base;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserAttribute extends Base
 {
@@ -14,4 +15,14 @@ class UserAttribute extends Base
     protected $fillable = [
         'value',
     ];
+
+    /**
+     * Get the attribute definition.
+     *
+     * @return BelongsTo<AttributeDefinition>
+     */
+    public function attributeDefinition(): BelongsTo
+    {
+        return $this->belongsTo(AttributeDefinition::class);
+    }
 }

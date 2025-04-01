@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Models\Base;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserDocument extends Base
 {
@@ -16,4 +17,14 @@ class UserDocument extends Base
         'issued_at' => 'date',
         'expires_at' => 'date',
     ];
+
+    /**
+     * Get the document type.
+     *
+     * @return BelongsTo<DocumentType>
+     */
+    public function documentType(): BelongsTo
+    {
+        return $this->belongsTo(DocumentType::class);
+    }
 }

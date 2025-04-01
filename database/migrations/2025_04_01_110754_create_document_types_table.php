@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('document_types', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
             $table->string('country_code', 2);
+            $table->string('name');
             $table->string('regex_pattern')->nullable();
             $table->boolean('requires_expiration')->default(false);
             $table->timestamps();
