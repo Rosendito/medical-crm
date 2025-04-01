@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\Models\Users\AttributeDefinitionType;
+use App\Enums\Models\Attributes\AttributeDefinitionType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -2,6 +2,7 @@
 
 namespace App\Models\Users;
 
+use App\Enums\Models\Users\UserContactType;
 use App\Models\Base;
 
 class UserContact extends Base
@@ -27,6 +28,7 @@ class UserContact extends Base
     protected function casts(): array
     {
         return [
+            'type' => UserContactType::class,
             'is_primary' => 'boolean',
             'verified_at' => 'datetime',
         ];
