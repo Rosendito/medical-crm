@@ -3,6 +3,7 @@
 namespace App\Models\Users;
 
 use App\Models\Base;
+use App\Models\Identity\DocumentType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserDocument extends Base
