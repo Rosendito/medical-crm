@@ -2,9 +2,9 @@
 
 namespace App\Models\Socials;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Base;
 
-class SocialPlatform extends Model
+class SocialPlatform extends Base
 {
     /**
      * The attributes that are mass assignable.

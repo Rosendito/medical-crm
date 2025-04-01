@@ -2,11 +2,11 @@
 
 namespace App\Models\Users;
 
+use App\Models\Base;
 use App\Models\Socials\SocialPlatform;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserSocialProfile extends Model
+class UserSocialProfile extends Base
 {
     /**
      * The attributes that are mass assignable.

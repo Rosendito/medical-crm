@@ -3,6 +3,7 @@
 namespace Database\Factories\Socials;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Socials\SocialPlatform>
@@ -55,13 +56,12 @@ class SocialPlatformFactory extends Factory
      */
     public function definition(): array
     {
-        $code = fake()->randomElement(array_keys($this->socials));
-        $platform = $this->socials[$code];
+        $platformName = fake()->unique()->company();
 
         return [
-            'name' => $platform['name'],
-            'code' => $code,
-            'base_url' => $platform['base_url'],
+            'name' => $platformName,
+            'code' => Str::snake($platformName),
+            'base_url' => fake()->optional()->url(),
             'regex_pattern' => null,
         ];
     }
