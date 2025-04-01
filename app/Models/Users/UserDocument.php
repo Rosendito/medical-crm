@@ -3,11 +3,22 @@
 namespace App\Models\Users;
 
 use App\Models\Base;
-use App\Models\Identity\DocumentType;
+use App\Models\Identities\DocumentType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UserDocument extends Base
 {
+    /**
+     * The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'number',
+        'issued_by',
+        'is_verified',
+        'issued_at',
+        'expires_at',
+    ];
+
     /**
      * The attributes that should be cast.
      *

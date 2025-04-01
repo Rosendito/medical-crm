@@ -6,6 +6,7 @@ use App\Models\Users\UserAddress;
 use App\Models\Users\UserAttribute;
 use App\Models\Users\UserContact;
 use App\Models\Users\UserDocument;
+use App\Models\Users\UserSocialProfile;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,7 +58,7 @@ class User extends Authenticatable
      *
      * @return HasMany<UserContact>
      */
-    public function contacts(): HasMany
+    public function userContacts(): HasMany
     {
         return $this->hasMany(UserContact::class);
     }
@@ -67,7 +68,7 @@ class User extends Authenticatable
      *
      * @return HasMany<UserDocument>
      */
-    public function documents(): HasMany
+    public function userDocuments(): HasMany
     {
         return $this->hasMany(UserDocument::class);
     }
@@ -77,7 +78,7 @@ class User extends Authenticatable
      *
      * @return HasMany<UserAddress>
      */
-    public function addresses(): HasMany
+    public function userAddresses(): HasMany
     {
         return $this->hasMany(UserAddress::class);
     }
@@ -87,8 +88,18 @@ class User extends Authenticatable
      *
      * @return HasMany<UserAttribute>
      */
-    public function attributes(): HasMany
+    public function userAttributes(): HasMany
     {
         return $this->hasMany(UserAttribute::class);
+    }
+
+    /**
+     * Get all of the social profiles for the user.
+     *
+     * @return HasMany<UserSocialProfile>
+     */
+    public function userSocialProfiles(): HasMany
+    {
+        return $this->hasMany(UserSocialProfile::class);
     }
 }

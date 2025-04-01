@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Identity;
+namespace App\Models\Identities;
 
 use App\Models\Base;
 
