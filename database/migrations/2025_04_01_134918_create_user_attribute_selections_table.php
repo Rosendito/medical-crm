@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_attribute_selections', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_attribute_id')->constrained('user_attributes');
-            $table->foreignUuid('attribute_option_id')->constrained('attribute_options');
+            $table->foreignUuid('attribute_option_id')->constrained('attribute_definition_options');
             $table->timestamps();
         });
     }
