@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Users\UserAddress;
+use App\Models\Users\UserAttribute;
+use App\Models\Users\UserContact;
+use App\Models\Users\UserDocument;
+use App\Models\Users\UserSocialProfile;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, HasUuids, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +23,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -44,5 +51,55 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get all of the contacts for the user.
+     *
+     * @return HasMany<UserContact>
+     */
+    public function userContacts(): HasMany
+    {
+        return $this->hasMany(UserContact::class);
+    }
+
+    /**
+     * Get all of the documents for the user.
+     *
+     * @return HasMany<UserDocument>
+     */
+    public function userDocuments(): HasMany
+    {
+        return $this->hasMany(UserDocument::class);
+    }
+
+    /**
+     * Get all of the addresses for the user.
+     *
+     * @return HasMany<UserAddress>
+     */
+    public function userAddresses(): HasMany
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+    /**
+     * Get all of the attributes for the user.
+     *
+     * @return HasMany<UserAttribute>
+     */
+    public function userAttributes(): HasMany
+    {
+        return $this->hasMany(UserAttribute::class);
+    }
+
+    /**
+     * Get all of the social profiles for the user.
+     *
+     * @return HasMany<UserSocialProfile>
+     */
+    public function userSocialProfiles(): HasMany
+    {
+        return $this->hasMany(UserSocialProfile::class);
     }
 }
