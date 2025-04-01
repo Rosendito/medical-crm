@@ -2,9 +2,10 @@
 
 namespace App\Models\Users;
 
+use App\Models\Base;
 use Illuminate\Database\Eloquent\Model;
 
-class AttributeDefinitionOption extends Model
+class AttributeDefinitionOption extends Base
 {
     /**
      * The attributes that are mass assignable.

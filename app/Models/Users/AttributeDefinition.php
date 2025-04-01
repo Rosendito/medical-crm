@@ -3,9 +3,10 @@
 namespace App\Models\Users;
 
 use App\Enums\Models\Users\AttributeDefinitionType;
+use App\Models\Base;
 use Illuminate\Database\Eloquent\Model;
 
-class AttributeDefinition extends Model
+class AttributeDefinition extends Base
 {
     /**
      * The attributes that are mass assignable.

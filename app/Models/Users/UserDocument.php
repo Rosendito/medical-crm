@@ -2,9 +2,10 @@
 
 namespace App\Models\Users;
 
+use App\Models\Base;
 use Illuminate\Database\Eloquent\Model;
 
-class UserDocument extends Model
+class UserDocument extends Base
 {
     /**
      * The attributes that should be cast.

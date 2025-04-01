@@ -2,9 +2,10 @@
 
 namespace App\Models\Users;
 
+use App\Models\Base;
 use Illuminate\Database\Eloquent\Model;
 
-class UserContact extends Model
+class UserContact extends Base
 {
     /**
      * The attributes that are mass assignable.
