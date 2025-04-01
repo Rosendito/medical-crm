@@ -3,7 +3,6 @@
 namespace App\Models\Users;
 
 use App\Models\Base;
-use Illuminate\Database\Eloquent\Model;
 
 class AttributeDefinitionOption extends Base
 {
@@ -15,7 +14,7 @@ class AttributeDefinitionOption extends Base
     protected $fillable = [
         'value',
         'label',
-        'order'
+        'order',
     ];
 
     /**

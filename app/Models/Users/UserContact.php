@@ -3,7 +3,6 @@
 namespace App\Models\Users;
 
 use App\Models\Base;
-use Illuminate\Database\Eloquent\Model;
 
 class UserContact extends Base
 {
@@ -17,7 +16,7 @@ class UserContact extends Base
         'value',
         'label',
         'is_primary',
-        'verified_at'
+        'verified_at',
     ];
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Enums\Models\Users;
 
-enum AttributeDefinitionType:string
+enum AttributeDefinitionType: string
 {
     case SELECT = 'select';
     case MULTI_SELECT = 'multi_select';
