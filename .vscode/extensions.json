@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "open-southeners.laravel-pint", // Laravel Pint formatter
+        "adrianwilczynski.alpine-js-intellisense", // Alpine JS IntelliSense
+        "cierra.livewire-vscode", // Livewire Language Support
+        "neilbrayfield.php-docblocker", // PHP Doc Blocker
+        "esbenp.prettier-vscode", // Prettier formatter
+        "bmewburn.vscode-intelephense-client", // PHP Intelephense
+        "MehediDracula.php-namespace-resolver", // PHP Namespace Resolver
+        "adpyke.vscode-sql-formatter", // SQL Formatter
+        "bradlc.vscode-tailwindcss" // Tailwind CSS Intellisense
+    ]
+}
