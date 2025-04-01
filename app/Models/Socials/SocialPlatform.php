@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Social;
+namespace App\Models\Socials;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -2,7 +2,7 @@
 
 namespace App\Models\Users;
 
-use App\Models\Social\SocialPlatform;
+use App\Models\Socials\SocialPlatform;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
