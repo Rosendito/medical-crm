@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Concerns\Models\HasEncryptedFieldRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedFields;
 use App\Models\Users\UserAddress;
 use App\Models\Users\UserAttribute;
 use App\Models\Users\UserContact;
@@ -13,9 +15,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ShouldRotateEncryptedFields
 {
-    use HasFactory, HasUuids, Notifiable;
+    use HasEncryptedFieldRotation, HasFactory, HasUuids, Notifiable;
 
     /**
      * The attributes that are mass assignable.
