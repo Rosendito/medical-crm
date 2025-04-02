@@ -36,11 +36,11 @@ However, encrypted attribute values must be manually re-encrypted after a key ch
 php artisan crypt:rotate-encrypted-attributes
 ```
 
-Command class: [/app/Console/Commands/Encryption/RotateEncryptedAttributes.php](/app/Console/Commands/Encryption/RotateEncryptedAttributes.php)
+Command class: [`/app/Console/Commands/Encryption/RotateEncryptedAttributes.php`](https://github.com/Rosendito/medical-crm/blob/main/app/Console/Commands/Encryption/RotateEncryptedAttributes.php)
 
 This command scans for models implementing the following interface:
 
-[/app/Contracts/Encryption/ShouldRotateEncryptedFields.php](/app/Contracts/Encryption/ShouldRotateEncryptedFields.php)
+[`/app/Contracts/Encryption/ShouldRotateEncryptedFields.php`](https://github.com/Rosendito/medical-crm/blob/main/app/Contracts/Encryption/ShouldRotateEncryptedFields.php)
 
 Each model is then processed via the method:
 
@@ -77,7 +77,7 @@ To test the encryption rotation process locally:
 
 You can track the internal behavior of the rotation logic with descriptive unit tests:
 
-[/tests/Unit/Actions/Encryption/RotateModelEncryptedFieldsTest.php](/tests/Unit/Actions/Encryption/RotateModelEncryptedFieldsTest.php)
+[`/tests/Unit/Actions/Encryption/RotateModelEncryptedFieldsTest.php`](https://github.com/Rosendito/medical-crm/blob/main/tests/Unit/Actions/Encryption/RotateModelEncryptedFieldsTest.php)
 
 ## Column Size Handling
 
@@ -87,7 +87,7 @@ On average, an encrypted string grows approximately 4x its original size. To pre
 
 These standardized sizes are configured in:
 
-[/config/database.php](/config/database.php) → `encryptables` section
+[`/config/database.php`](https://github.com/Rosendito/medical-crm/blob/main/config/database.php) → `encryptables` section
 
 > ⚠️ **Note:** These values may evolve over time. Always refer to the config file to confirm the current size recommendations.
 
@@ -105,7 +105,7 @@ These standardized sizes are configured in:
 
 Column sizes are declared via the enum:
 
-[/app/Enums/Encryption/EncryptedColumnSize.php](/app/Enums/Encryption/EncryptedColumnSize.php)
+[`/app/Enums/Encryption/EncryptedColumnSize.php`](https://github.com/Rosendito/medical-crm/blob/main/app/Enums/Encryption/EncryptedColumnSize.php)
 
 ### Usage in Migrations
 
