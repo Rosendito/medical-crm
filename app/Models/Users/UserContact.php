@@ -2,11 +2,15 @@
 
 namespace App\Models\Users;
 
+use App\Concerns\Models\HasEncryptedAttributeRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Enums\Models\Users\UserContactType;
 use App\Models\Base;
 
-class UserContact extends Base
+class UserContact extends Base implements ShouldRotateEncryptedAttributes
 {
+    use HasEncryptedAttributeRotation;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +33,8 @@ class UserContact extends Base
     {
         return [
             'type' => UserContactType::class,
+            'value' => 'encrypted',
+            'label' => 'encrypted',
             'is_primary' => 'boolean',
             'verified_at' => 'datetime',
         ];

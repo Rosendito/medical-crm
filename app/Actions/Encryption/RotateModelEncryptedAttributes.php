@@ -3,21 +3,21 @@
 namespace App\Actions\Encryption;
 
 use App\Concerns\Actions\ResolvableAction;
-use App\Contracts\Encryption\ShouldRotateEncryptedFields;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Crypt;
 
-class RotateModelEncryptedFields
+class RotateModelEncryptedAttributes
 {
     use ResolvableAction;
 
     /**
      * Re-encrypts all encrypted attributes of a given model implementing
-     * ShouldRotateEncryptedFields. This is useful when rotating encryption keys.
+     * ShouldRotateEncryptedAttributes. This is useful when rotating encryption keys.
      *
-     * @param  ShouldRotateEncryptedFields&Model  $model
+     * @param  ShouldRotateEncryptedAttributes&Model  $model
      */
-    public function handle(ShouldRotateEncryptedFields $model): void
+    public function handle(ShouldRotateEncryptedAttributes $model): void
     {
         $encryptedAttributes = $model->getEncryptedAttributes();
 

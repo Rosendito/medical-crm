@@ -15,7 +15,7 @@
 <!-- List key files/directories involved in this change -->
 <!-- Example:
 - Command: app/Console/Commands/Encryption/RotateEncryptedAttributes.php
-- Interface: app/Contracts/Encryption/ShouldRotateEncryptedFields.php
+- Interface: app/Contracts/Encryption/ShouldRotateEncryptedAttributes.php
 -->
 
 ---

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Encryption;
 
-use App\Actions\Encryption\FindModelsWithEncryptedFieldsToRotate;
+use App\Actions\Encryption\FindModelsWithEncryptedAttributesToRotate;
 use Illuminate\Console\Command;
 use Laravel\Prompts\Progress;
 use Laravel\Prompts\Table;
@@ -19,7 +19,7 @@ class RotateEncryptedAttributes extends Command
 
     public function handle(): void
     {
-        $modelClasses = collect(FindModelsWithEncryptedFieldsToRotate::make()->handle());
+        $modelClasses = collect(FindModelsWithEncryptedAttributesToRotate::make()->handle());
 
         if ($modelClasses->isEmpty()) {
             $this->info('No models found with encrypted fields to rotate.');
@@ -78,7 +78,7 @@ class RotateEncryptedAttributes extends Command
     protected function rotateChunk($chunk, Progress $progress, int &$updatedCount): void
     {
         foreach ($chunk as $model) {
-            $model->rotateEncryptedFields();
+            $model->rotateEncryptedAttributes();
 
             $updatedCount++;
 

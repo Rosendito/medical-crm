@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Actions\Encryption;
 
-use App\Actions\Encryption\RotateModelEncryptedFields;
-use App\Contracts\Encryption\ShouldRotateEncryptedFields;
+use App\Actions\Encryption\RotateModelEncryptedAttributes;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Models\User;
 use App\Models\Users\UserAddress;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 
-class RotateModelEncryptedFieldsTest extends TestCase
+class RotateModelEncryptedAttributesTest extends TestCase
 {
     protected const SAMPLE_STREET_LINE = 'Some place in the planet';
 
@@ -50,7 +50,7 @@ class RotateModelEncryptedFieldsTest extends TestCase
 
         $this->setEncryptionKey($oldKey);
 
-        /** @var Model&ShouldRotateEncryptedFields $model */
+        /** @var Model&ShouldRotateEncryptedAttributes $model */
         $model = $modelClass::factory()->create([
             $fieldData['field'] => $fieldData['value'],
         ]);
@@ -59,7 +59,7 @@ class RotateModelEncryptedFieldsTest extends TestCase
 
         $this->setEncryptionKey($newKey, [$oldKey]);
 
-        RotateModelEncryptedFields::make()->handle($model->fresh());
+        RotateModelEncryptedAttributes::make()->handle($model->fresh());
 
         $model->refresh();
 
