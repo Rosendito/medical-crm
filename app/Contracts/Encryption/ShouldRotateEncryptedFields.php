@@ -2,4 +2,9 @@
 
 namespace App\Contracts\Encryption;
 
-interface ShouldRotateEncryptedFields {}
+interface ShouldRotateEncryptedFields
+{
+    public function rotateEncryptedFields(): void;
+
+    public function getEncryptedAttributes(): array;
+}

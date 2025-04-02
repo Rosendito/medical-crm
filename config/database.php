@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Encryption\EncryptedColumnSize;
 use Illuminate\Support\Str;
 
 return [
@@ -197,21 +198,21 @@ return [
     */
     'encryptables' => [
         // For short sensitive values like phone numbers or email addresses
-        'small' => [
-            'real_string_length' => 64,
-            'encrypted_string_length' => 320,
+        EncryptedColumnSize::SMALL->value => [
+            'plain_string_length' => 64,
+            'encrypted_string_length' => 768,
         ],
 
         // For medium-length data such as full names or identifiers
-        'medium' => [
-            'real_string_length' => 128,
-            'encrypted_string_length' => 640,
+        EncryptedColumnSize::MEDIUM->value => [
+            'plain_string_length' => 128,
+            'encrypted_string_length' => 1280,
         ],
 
         // For longer values such as street addresses or descriptions
-        'large' => [
-            'real_string_length' => 256,
-            'encrypted_string_length' => 1280,
+        EncryptedColumnSize::LARGE->value => [
+            'plain_string_length' => 256,
+            'encrypted_string_length' => 2560,
         ],
     ],
 ];

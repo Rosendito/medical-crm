@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\Encryption\EncryptedColumnSize;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\ColumnDefinition;
 use Illuminate\Support\ServiceProvider;
@@ -26,11 +27,9 @@ class MigrationsServiceProvider extends ServiceProvider
 
     protected function registerBlueprintMacros(): void
     {
-        Blueprint::macro('encryptedString', function (string $column, string $size = 'small'): ColumnDefinition {
-            /** @var \Illuminate\Database\Schema\Blueprint $this */
-            $length = encryptable_column_length($size);
-
-            return $this->string($column, $length);
+        Blueprint::macro('encryptedString', function (string $column, EncryptedColumnSize $size): ColumnDefinition {
+            /** @var Blueprint $this */
+            return $this->string($column, $size->encryptedStringLimit());
         });
     }
 }

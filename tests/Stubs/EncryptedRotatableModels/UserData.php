@@ -2,11 +2,14 @@
 
 namespace Tests\Stubs\EncryptedRotatableModels;
 
+use App\Concerns\Models\HasEncryptedFieldRotation;
 use App\Contracts\Encryption\ShouldRotateEncryptedFields;
 use Illuminate\Database\Eloquent\Model;
 
 class UserData extends Model implements ShouldRotateEncryptedFields
 {
+    use HasEncryptedFieldRotation;
+
     /**
      * Get the attributes that should be cast.
      *

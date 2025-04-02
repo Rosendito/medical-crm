@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Actions\Encryption;
+namespace Tests\Unit\Actions\Encryption;
 
 use App\Actions\Encryption\FindModelsWithEncryptedFieldsToRotate as TestTargetAction;
 use Symfony\Component\Finder\Finder;

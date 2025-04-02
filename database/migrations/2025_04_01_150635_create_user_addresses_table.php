@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Encryption\EncryptedColumnSize;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,9 +17,9 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained('users');
             $table->string('country_code', 2);
             $table->string('type')->nullable();
-            $table->encryptedString('label', 'medium')->nullable();
-            $table->encryptedString('street_line_1', 'large');
-            $table->encryptedString('street_line_2', 'large')->nullable();
+            $table->encryptedString('label', EncryptedColumnSize::MEDIUM)->nullable();
+            $table->encryptedString('street_line_1', EncryptedColumnSize::LARGE);
+            $table->encryptedString('street_line_2', EncryptedColumnSize::LARGE)->nullable();
             $table->string('city');
             $table->string('state')->nullable();
             $table->string('postal_code')->nullable();
