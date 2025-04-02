@@ -17,9 +17,10 @@ class AttributeDefinition extends Base
         'key',
         'label',
         'type',
+        'regex_pattern',
         'is_required',
         'is_visible',
-        'regex_pattern',
+        'should_encrypt',
     ];
 
     /**
@@ -31,6 +32,7 @@ class AttributeDefinition extends Base
         'type' => AttributeDefinitionType::class,
         'is_required' => 'boolean',
         'is_visible' => 'boolean',
+        'should_encrypt' => 'boolean',
     ];
 
     /**

@@ -2,10 +2,14 @@
 
 namespace App\Models\Attributes;
 
+use App\Concerns\Models\HasEncryptedAttributeRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Models\Base;
 
-class AttributeDefinitionOption extends Base
+class AttributeDefinitionOption extends Base implements ShouldRotateEncryptedAttributes
 {
+    use HasEncryptedAttributeRotation;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -13,6 +17,7 @@ class AttributeDefinitionOption extends Base
      */
     protected $fillable = [
         'value',
+        'encrypted_value',
         'label',
         'order',
     ];
@@ -22,5 +27,7 @@ class AttributeDefinitionOption extends Base
      *
      * @var list<string>
      */
-    protected $casts = [];
+    protected $casts = [
+        'encrypted_value' => 'encrypted',
+    ];
 }

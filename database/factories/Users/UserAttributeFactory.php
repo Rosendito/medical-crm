@@ -22,6 +22,7 @@ class UserAttributeFactory extends Factory
             'user_id' => User::factory(),
             'attribute_definition_id' => AttributeDefinition::factory(),
             'value' => fake()->word(),
+            'encrypted_value' => null,
         ];
     }
 }

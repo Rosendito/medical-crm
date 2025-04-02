@@ -2,13 +2,17 @@
 
 namespace App\Models\Users;
 
+use App\Concerns\Models\HasEncryptedAttributeRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Models\Attributes\AttributeDefinition;
 use App\Models\Base;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserAttribute extends Base
+class UserAttribute extends Base implements ShouldRotateEncryptedAttributes
 {
+    use HasEncryptedAttributeRotation;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,6 +20,16 @@ class UserAttribute extends Base
      */
     protected $fillable = [
         'value',
+        'encrypted_value',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var list<string>
+     */
+    protected $casts = [
+        'encrypted_value' => 'encrypted',
     ];
 
     /**

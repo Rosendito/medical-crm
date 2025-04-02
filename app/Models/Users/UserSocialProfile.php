@@ -2,12 +2,16 @@
 
 namespace App\Models\Users;
 
+use App\Concerns\Models\HasEncryptedAttributeRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Models\Base;
 use App\Models\Socials\SocialPlatform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserSocialProfile extends Base
+class UserSocialProfile extends Base implements ShouldRotateEncryptedAttributes
 {
+    use HasEncryptedAttributeRotation;
+
     /**
      * The attributes that are mass assignable.
      */
@@ -21,6 +25,8 @@ class UserSocialProfile extends Base
      * The attributes that should be cast.
      */
     protected $casts = [
+        'handle' => 'encrypted',
+        'url' => 'encrypted',
         'is_primary' => 'boolean',
     ];
 

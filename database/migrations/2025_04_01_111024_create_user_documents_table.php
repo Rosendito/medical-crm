@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Encryption\EncryptedColumnSize;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +16,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('document_type_id')->constrained('document_types');
-            $table->string('number');
-            $table->string('issued_by')->nullable();
+            $table->encryptedString('number', EncryptedColumnSize::MEDIUM);
+            $table->encryptedString('issued_by', EncryptedColumnSize::MEDIUM)->nullable();
             $table->boolean('is_verified')->default(false);
             $table->date('issued_at')->nullable();
             $table->date('expires_at')->nullable();

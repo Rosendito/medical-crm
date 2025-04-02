@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('key')->unique();
             $table->string('label');
             $table->string('type')->default(AttributeDefinitionType::SELECT);
+            $table->string('regex_pattern')->nullable();
             $table->boolean('is_required')->default(false);
             $table->boolean('is_visible')->default(true);
-            $table->string('regex_pattern')->nullable();
+            $table->boolean('should_encrypt')->default(false);
             $table->timestamps();
         });
     }

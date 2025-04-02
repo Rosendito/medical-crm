@@ -2,12 +2,16 @@
 
 namespace App\Models\Users;
 
+use App\Concerns\Models\HasEncryptedAttributeRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Models\Base;
 use App\Models\Identities\DocumentType;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserDocument extends Base
+class UserDocument extends Base implements ShouldRotateEncryptedAttributes
 {
+    use HasEncryptedAttributeRotation;
+
     /**
      * The attributes that are mass assignable.
      */
@@ -25,6 +29,8 @@ class UserDocument extends Base
      * @var list<string>
      */
     protected $casts = [
+        'number' => 'encrypted',
+        'issued_by' => 'encrypted',
         'is_verified' => 'boolean',
         'issued_at' => 'date',
         'expires_at' => 'date',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Encryption\EncryptedColumnSize;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,8 @@ return new class extends Migration
         Schema::create('attribute_definition_options', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('attribute_definition_id')->constrained('attribute_definitions');
-            $table->string('value');
+            $table->string('value')->nullable();
+            $table->encryptedString('encrypted_value', EncryptedColumnSize::LARGE)->nullable();
             $table->string('label');
             $table->integer('order')->default(0);
             $table->timestamps();
