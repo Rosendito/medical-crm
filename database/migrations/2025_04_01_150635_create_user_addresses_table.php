@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained('users');
             $table->string('country_code', 2);
             $table->string('type')->nullable();
-            $table->string('label')->nullable();
-            $table->string('street_line_1');
-            $table->string('street_line_2')->nullable();
+            $table->encryptedString('label', 'medium')->nullable();
+            $table->encryptedString('street_line_1', 'large');
+            $table->encryptedString('street_line_2', 'large')->nullable();
             $table->string('city');
             $table->string('state')->nullable();
             $table->string('postal_code')->nullable();
