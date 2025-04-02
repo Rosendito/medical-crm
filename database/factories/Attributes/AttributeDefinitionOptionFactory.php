@@ -20,6 +20,7 @@ class AttributeDefinitionOptionFactory extends Factory
         return [
             'attribute_definition_id' => AttributeDefinition::factory(),
             'value' => fake()->slug(),
+            'encrypted_value' => null,
             'label' => fake()->word(),
             'order' => fake()->numberBetween(0, 10),
         ];

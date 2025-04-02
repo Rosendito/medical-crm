@@ -2,14 +2,14 @@
 
 namespace App\Concerns\Models;
 
-use App\Actions\Encryption\RotateModelEncryptedFields;
+use App\Actions\Encryption\RotateModelEncryptedAttributes;
 use Illuminate\Database\Eloquent\Model;
 
-trait HasEncryptedFieldRotation
+trait HasEncryptedAttributeRotation
 {
-    public function rotateEncryptedFields(): void
+    public function rotateEncryptedAttributes(): void
     {
-        RotateModelEncryptedFields::make()->handle($this);
+        RotateModelEncryptedAttributes::make()->handle($this);
     }
 
     public function getEncryptedAttributes(): array

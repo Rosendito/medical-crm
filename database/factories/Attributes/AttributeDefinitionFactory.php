@@ -23,6 +23,7 @@ class AttributeDefinitionFactory extends Factory
             'type' => fake()->randomElement(AttributeDefinitionType::cases()),
             'is_required' => fake()->boolean(30),
             'is_visible' => true,
+            'should_encrypt' => false,
             'regex_pattern' => null,
         ];
     }

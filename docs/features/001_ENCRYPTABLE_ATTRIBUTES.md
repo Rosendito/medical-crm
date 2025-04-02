@@ -40,12 +40,12 @@ Command class: [`/app/Console/Commands/Encryption/RotateEncryptedAttributes.php`
 
 This command scans for models implementing the following interface:
 
-[`/app/Contracts/Encryption/ShouldRotateEncryptedFields.php`](https://github.com/Rosendito/medical-crm/blob/main/app/Contracts/Encryption/ShouldRotateEncryptedFields.php)
+[`/app/Contracts/Encryption/ShouldRotateEncryptedAttributes.php`](https://github.com/Rosendito/medical-crm/blob/main/app/Contracts/Encryption/ShouldRotateEncryptedAttributes.php)
 
 Each model is then processed via the method:
 
 ```php
-$model->rotateEncryptedFields()
+$model->rotateEncryptedAttributes()
 ```
 
 ## How to Test Locally
@@ -77,7 +77,7 @@ To test the encryption rotation process locally:
 
 You can track the internal behavior of the rotation logic with descriptive unit tests:
 
-[`/tests/Unit/Actions/Encryption/RotateModelEncryptedFieldsTest.php`](https://github.com/Rosendito/medical-crm/blob/main/tests/Unit/Actions/Encryption/RotateModelEncryptedFieldsTest.php)
+[`/tests/Unit/Actions/Encryption/RotateModelEncryptedAttributesTest.php`](https://github.com/Rosendito/medical-crm/blob/main/tests/Unit/Actions/Encryption/RotateModelEncryptedAttributesTest.php)
 
 ## Column Size Handling
 

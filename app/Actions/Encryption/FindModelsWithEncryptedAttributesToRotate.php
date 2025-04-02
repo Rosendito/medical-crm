@@ -3,11 +3,11 @@
 namespace App\Actions\Encryption;
 
 use App\Concerns\Actions\ResolvableAction;
-use App\Contracts\Encryption\ShouldRotateEncryptedFields;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class FindModelsWithEncryptedFieldsToRotate
+class FindModelsWithEncryptedAttributesToRotate
 {
     use ResolvableAction;
 
@@ -23,7 +23,7 @@ class FindModelsWithEncryptedFieldsToRotate
 
     /**
      * Find all model classes within the target path
-     * that implement the ShouldRotateEncryptedFields interface.
+     * that implement the ShouldRotateEncryptedAttributes interface.
      *
      * @return array<int, class-string>
      */
@@ -70,6 +70,6 @@ class FindModelsWithEncryptedFieldsToRotate
             return false;
         }
 
-        return in_array(ShouldRotateEncryptedFields::class, class_implements($className));
+        return in_array(ShouldRotateEncryptedAttributes::class, class_implements($className));
     }
 }

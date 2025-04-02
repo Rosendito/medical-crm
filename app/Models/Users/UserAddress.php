@@ -2,13 +2,13 @@
 
 namespace App\Models\Users;
 
-use App\Concerns\Models\HasEncryptedFieldRotation;
-use App\Contracts\Encryption\ShouldRotateEncryptedFields;
+use App\Concerns\Models\HasEncryptedAttributeRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Models\Base;
 
-class UserAddress extends Base implements ShouldRotateEncryptedFields
+class UserAddress extends Base implements ShouldRotateEncryptedAttributes
 {
-    use HasEncryptedFieldRotation;
+    use HasEncryptedAttributeRotation;
 
     /**
      * The attributes that are mass assignable.

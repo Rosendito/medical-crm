@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Encryption\EncryptedColumnSize;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('attribute_definition_id')->constrained('attribute_definitions');
             $table->string('value')->nullable();
+            $table->encryptedString('encrypted_value', EncryptedColumnSize::LARGE)->nullable();
             $table->timestamps();
         });
     }

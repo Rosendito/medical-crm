@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\Actions\Encryption;
 
-use App\Actions\Encryption\FindModelsWithEncryptedFieldsToRotate as TestTargetAction;
+use App\Actions\Encryption\FindModelsWithEncryptedAttributesToRotate as TestTargetAction;
 use Symfony\Component\Finder\Finder;
 use Tests\Data\EncryptedRotatableData;
 use Tests\TestCase;
 
-class FindModelsWithEncryptedFieldsToRotateTest extends TestCase
+class FindModelsWithEncryptedAttributesToRotateTest extends TestCase
 {
     protected EncryptedRotatableData $testData;
 
