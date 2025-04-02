@@ -2,10 +2,14 @@
 
 namespace App\Models\Users;
 
+use App\Concerns\Models\HasEncryptedFieldRotation;
+use App\Contracts\Encryption\ShouldRotateEncryptedFields;
 use App\Models\Base;
 
-class UserAddress extends Base
+class UserAddress extends Base implements ShouldRotateEncryptedFields
 {
+    use HasEncryptedFieldRotation;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +33,9 @@ class UserAddress extends Base
      * @var list<string>
      */
     protected $casts = [
+        'label' => 'encrypted',
+        'street_line_1' => 'encrypted',
+        'street_line_2' => 'encrypted',
         'is_primary' => 'boolean',
     ];
 }

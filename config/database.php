@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Encryption\EncryptedColumnSize;
 use Illuminate\Support\Str;
 
 return [
@@ -171,4 +172,47 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Encryptable Columns
+    |--------------------------------------------------------------------------
+    |
+    | This section defines standardized string lengths for fields that will
+    | be encrypted using Laravel's encryption system.
+    |
+    | Since encrypted values are significantly longer than their original
+    | plain-text values (due to serialization, IV, MAC, and base64 encoding),
+    | it's important to allocate enough space in the database to avoid
+    | truncation or data loss.
+    |
+    | The values below represent estimated maximum lengths for common types
+    | of encrypted data. These can be referenced when defining column sizes
+    | in your migrations.
+    |
+    | - `real_string_length`: the approximate maximum length of the original
+    |   plain-text value before encryption.
+    |
+    | - `encrypted_string_length`: the recommended column size (in characters)
+    |   to store the encrypted version of the value.
+    |
+    */
+    'encryptables' => [
+        // For short sensitive values like phone numbers or email addresses
+        EncryptedColumnSize::SMALL->value => [
+            'plain_string_length' => 64,
+            'encrypted_string_length' => 768,
+        ],
+
+        // For medium-length data such as full names or identifiers
+        EncryptedColumnSize::MEDIUM->value => [
+            'plain_string_length' => 128,
+            'encrypted_string_length' => 1280,
+        ],
+
+        // For longer values such as street addresses or descriptions
+        EncryptedColumnSize::LARGE->value => [
+            'plain_string_length' => 256,
+            'encrypted_string_length' => 2560,
+        ],
+    ],
 ];
