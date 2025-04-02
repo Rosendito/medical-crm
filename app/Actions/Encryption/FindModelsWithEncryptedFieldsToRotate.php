@@ -3,9 +3,9 @@
 namespace App\Actions\Encryption;
 
 use App\Concerns\Actions\ResolvableAction;
-use Illuminate\Support\Collection;
-use SplFileInfo;
+use App\Contracts\Encryption\ShouldRotateEncryptedFields;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 class FindModelsWithEncryptedFieldsToRotate
 {
@@ -15,41 +15,61 @@ class FindModelsWithEncryptedFieldsToRotate
 
     public function __construct(
         protected Finder $finder,
-        $modelsPath = null
+        protected string $namespace = 'App\\Models\\',
+        ?string $modelsPath = null
     ) {
         $this->modelsPath = $modelsPath ?? app_path('Models');
     }
 
-    public function handle()
+    /**
+     * Find all model classes within the target path
+     * that implement the ShouldRotateEncryptedFields interface.
+     *
+     * @return array<int, class-string>
+     */
+    public function handle(): array
     {
-        $modelClasses = $this->getModelClasses($this->getModelFinder());
+        $modelFiles = $this->getModelFiles();
 
-        dd($modelClasses);
+        $modelsToRotate = [];
+
+        foreach ($modelFiles as $file) {
+            $className = $this->resolveClassName($file);
+
+            if (! $this->isValidRotatableModel($className)) {
+                continue;
+            }
+
+            $modelsToRotate[] = $className;
+        }
+
+        return $modelsToRotate;
     }
 
-    protected function getModelFinder(): Finder
+    /**
+     * @return iterable<SplFileInfo>
+     */
+    protected function getModelFiles(): iterable
     {
-        return $this->finder->files()->in($this->modelsPath)->name('*.php');
+        return $this->finder
+            ->files()
+            ->in($this->modelsPath)
+            ->name('*.php');
     }
 
-    protected function getModelNamespace(string $relativePathname): string
+    protected function resolveClassName(SplFileInfo $file): string
     {
-        return 'App\\Models\\'.str_replace(['/', '.php'], ['\\', ''], $relativePathname);
+        $relativePath = $file->getRelativePathname();
+
+        return $this->namespace.str_replace(['/', '.php'], ['\\', ''], $relativePath);
     }
 
-    protected function getModelClasses(Finder $finder): Collection
+    protected function isValidRotatableModel(string $className): bool
     {
-        return collect($finder)
-            ->map(function (SplFileInfo $file) {
-                $modelClass = $this->getModelNamespace($file->getRelativePathname());
+        if (! class_exists($className)) {
+            return false;
+        }
 
-                if (! class_exists($modelClass)) {
-                    return null;
-                }
-
-                return $modelClass;
-            })
-            ->filter()
-            ->values();
+        return in_array(ShouldRotateEncryptedFields::class, class_implements($className));
     }
 }
