@@ -7,6 +7,7 @@ use App\Contracts\Encryption\ShouldRotateEncryptedFields;
 use App\Models\User;
 use App\Models\Users\UserAddress;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Encryption\EncryptionServiceProvider;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
@@ -80,6 +81,10 @@ class RotateModelEncryptedFieldsTest extends TestCase
     {
         Config::set('app.key', $key);
         Config::set('app.previous_keys', $previousKeys);
+
+        (new EncryptionServiceProvider($this->app))->register();
+
+        Crypt::swap($this->app->make('encrypter'));
     }
 
     protected function assertEncryptedFieldWasRotated($model, string $field, string $originalEncryptedValue): void
