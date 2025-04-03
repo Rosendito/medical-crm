@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\SecureDeterministicHash;
 use App\Concerns\Models\HasEncryptedAttributeRotation;
 use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Enums\Filament\PanelIdentifier;
@@ -17,7 +18,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements FilamentUser, ShouldRotateEncryptedAttributes
 {
@@ -57,7 +57,7 @@ class User extends Authenticatable implements FilamentUser, ShouldRotateEncrypte
             'first_name' => 'encrypted',
             'last_name' => 'encrypted',
             'email' => 'encrypted',
-            'email_hash' => 'hashed',
+            'email_hash' => SecureDeterministicHash::class,
             'password' => 'hashed',
             'email_verified_at' => 'datetime',
         ];
@@ -69,7 +69,7 @@ class User extends Authenticatable implements FilamentUser, ShouldRotateEncrypte
     protected static function booted(): void
     {
         static::creating(function (self $user) {
-            $user->email_hash = Hash::make($user->email);
+            $user->email_hash = $user->email;
         });
     }
 

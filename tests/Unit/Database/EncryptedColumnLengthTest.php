@@ -73,8 +73,8 @@ class EncryptedColumnLengthTest extends TestCase
         $limit = $columnSize->plainStringLimit();
 
         return match ($inputType) {
-            'fake' => Str::repeat(strtoupper($columnSize->name[0]), $limit),
-            'emoji' => Str::repeat(fake()->emoji(), $limit),
+            'fake' => Str::random($limit),
+            'emoji' => collect()->times($limit, fn () => fake()->emoji())->join(''),
             'realistic' => $this->generateRealisticText($columnSize, $limit)
         };
     }

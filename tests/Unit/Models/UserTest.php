@@ -9,6 +9,7 @@ use App\Models\Users\UserAttributeSelection;
 use App\Models\Users\UserContact;
 use App\Models\Users\UserDocument;
 use App\Models\Users\UserSocialProfile;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -52,6 +53,31 @@ class UserTest extends TestCase
         $someAttributeHasSelections = $user->userAttributes->some(fn ($userAttribute) => $userAttribute->userAttributeSelections->isNotEmpty());
 
         $this->assertTrue($someAttributeHasSelections);
+    }
+
+    public function test_email_hash_is_deterministic_and_unique(): void
+    {
+        $email = 'test@example.com';
+
+        $user = User::factory()->create([
+            'email' => $email,
+        ]);
+
+        $this->assertNotNull($user->email_hash);
+
+        $found = User::where('email_hash', secure_deterministic_hash($email))->first();
+
+        $this->assertNotNull($found);
+        $this->assertTrue($found->is($user));
+
+        $this->assertNotEquals($email, $user->email_hash);
+        $this->assertStringNotContainsString($email, $user->email_hash);
+
+        $this->expectException(UniqueConstraintViolationException::class);
+
+        User::factory()->create([
+            'email' => $email,
+        ]);
     }
 
     protected function assertHasHasManyRelationships(string $relationshipName, string $relatedClass): void
