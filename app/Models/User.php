@@ -4,18 +4,21 @@ namespace App\Models;
 
 use App\Concerns\Models\HasEncryptedAttributeRotation;
 use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
+use App\Enums\Filament\PanelIdentifier;
 use App\Models\Users\UserAddress;
 use App\Models\Users\UserAttribute;
 use App\Models\Users\UserContact;
 use App\Models\Users\UserDocument;
 use App\Models\Users\UserSocialProfile;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements ShouldRotateEncryptedAttributes
+class User extends Authenticatable implements FilamentUser, ShouldRotateEncryptedAttributes
 {
     use HasEncryptedAttributeRotation, HasFactory, HasUuids, Notifiable;
 
@@ -104,5 +107,13 @@ class User extends Authenticatable implements ShouldRotateEncryptedAttributes
     public function userSocialProfiles(): HasMany
     {
         return $this->hasMany(UserSocialProfile::class);
+    }
+
+    /**
+     * Determine if the user can access the given panel.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $panel->getId() === PanelIdentifier::CRM->value;
     }
 }
