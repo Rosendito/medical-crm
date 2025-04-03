@@ -1,4 +1,4 @@
-## ✨ Title
+## ✨ Title (Generate from pr content)
 
 <!-- Write a clear and concise title for the PR using semantic commit style (e.g., feat(encryption): add support for encrypted attributes) -->
 
@@ -16,6 +16,8 @@
 <!-- Example:
 - Command: app/Console/Commands/Encryption/RotateEncryptedAttributes.php
 - Interface: app/Contracts/Encryption/ShouldRotateEncryptedAttributes.php
+
+Use https://github.com/Rosendito/medical-crm/blob/main/
 -->
 
 ---

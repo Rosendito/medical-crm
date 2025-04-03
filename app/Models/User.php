@@ -2,20 +2,25 @@
 
 namespace App\Models;
 
+use App\Casts\SecureDeterministicHash;
 use App\Concerns\Models\HasEncryptedAttributeRotation;
 use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
+use App\Enums\Filament\PanelIdentifier;
 use App\Models\Users\UserAddress;
 use App\Models\Users\UserAttribute;
 use App\Models\Users\UserContact;
 use App\Models\Users\UserDocument;
 use App\Models\Users\UserSocialProfile;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements ShouldRotateEncryptedAttributes
+class User extends Authenticatable implements FilamentUser, HasName, ShouldRotateEncryptedAttributes
 {
     use HasEncryptedAttributeRotation, HasFactory, HasUuids, Notifiable;
 
@@ -25,7 +30,6 @@ class User extends Authenticatable implements ShouldRotateEncryptedAttributes
      * @var list<string>
      */
     protected $fillable = [
-        'username',
         'first_name',
         'last_name',
         'email',
@@ -38,6 +42,7 @@ class User extends Authenticatable implements ShouldRotateEncryptedAttributes
      * @var list<string>
      */
     protected $hidden = [
+        'email_hash',
         'password',
         'remember_token',
     ];
@@ -50,10 +55,23 @@ class User extends Authenticatable implements ShouldRotateEncryptedAttributes
     protected function casts(): array
     {
         return [
+            'first_name' => 'encrypted',
+            'last_name' => 'encrypted',
             'email' => 'encrypted',
-            'email_verified_at' => 'datetime',
+            'email_hash' => SecureDeterministicHash::class,
             'password' => 'hashed',
+            'email_verified_at' => 'datetime',
         ];
+    }
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (self $user) {
+            $user->email_hash = $user->email;
+        });
     }
 
     /**
@@ -104,5 +122,21 @@ class User extends Authenticatable implements ShouldRotateEncryptedAttributes
     public function userSocialProfiles(): HasMany
     {
         return $this->hasMany(UserSocialProfile::class);
+    }
+
+    /**
+     * Determine if the user can access the given panel.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $panel->getId() === PanelIdentifier::CRM->value;
+    }
+
+    /**
+     * Define the filament name.
+     */
+    public function getFilamentName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
     }
 }

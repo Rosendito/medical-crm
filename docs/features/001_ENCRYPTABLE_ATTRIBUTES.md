@@ -126,3 +126,14 @@ Schema::create('patients', function (Blueprint $table) {
 ```
 
 This ensures all encrypted columns are sized appropriately and consistently across all migrations.
+
+## Login with Encrypted Emails
+
+Since the `email` attribute in the `users` table is encrypted, it cannot be used to perform direct lookups (e.g., during login) because encryption is non-deterministic. To solve this, a new `email_hash` column has been added to store a deterministic hash of the email.
+
+This hash is generated using a custom helper that applies `hash_hmac` with the SHA-256 algorithm, using the application's `APP_KEY` as the secret. A custom prefix is added to distinguish the format.
+
+You can find the implementation here:  
+https://github.com/Rosendito/medical-crm/blob/main/helpers/hashing.php
+
+**Note:** The encryption rotation command should eventually also rotate `email_hash` values to keep them synchronized with the decrypted email content. This is a pending feature.
