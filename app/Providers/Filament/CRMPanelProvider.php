@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Enums\Filament\PanelIdentifier;
+use App\Filament\Auth\Login;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -27,7 +28,7 @@ class CRMPanelProvider extends PanelProvider
             ->default()
             ->id(PanelIdentifier::CRM->value)
             ->path(PanelIdentifier::CRM->path())
-            ->login()
+            ->login(Login::class)
             ->colors([
                 'primary' => Color::Amber,
             ])

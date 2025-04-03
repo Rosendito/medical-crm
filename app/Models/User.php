@@ -12,6 +12,7 @@ use App\Models\Users\UserContact;
 use App\Models\Users\UserDocument;
 use App\Models\Users\UserSocialProfile;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements FilamentUser, ShouldRotateEncryptedAttributes
+class User extends Authenticatable implements FilamentUser, HasName, ShouldRotateEncryptedAttributes
 {
     use HasEncryptedAttributeRotation, HasFactory, HasUuids, Notifiable;
 
@@ -129,5 +130,13 @@ class User extends Authenticatable implements FilamentUser, ShouldRotateEncrypte
     public function canAccessPanel(Panel $panel): bool
     {
         return $panel->getId() === PanelIdentifier::CRM->value;
+    }
+
+    /**
+     * Define the filament name.
+     */
+    public function getFilamentName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
     }
 }
