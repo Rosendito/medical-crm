@@ -14,15 +14,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('username')->nullable();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->encryptedString('email', EncryptedColumnSize::SMALL)->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->encryptedString('first_name', EncryptedColumnSize::MEDIUM);
+            $table->encryptedString('last_name', EncryptedColumnSize::MEDIUM);
+            $table->encryptedString('email', EncryptedColumnSize::SMALL);
+
+            // Stores a hashed version of the email (also encrypted) to allow fast and
+            // secure lookups without exposing the original email
+            $table->string('email_hash')->unique();
+
             $table->string('password');
             $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**

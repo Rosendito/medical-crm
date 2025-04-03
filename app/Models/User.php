@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements FilamentUser, ShouldRotateEncryptedAttributes
 {
@@ -28,7 +29,6 @@ class User extends Authenticatable implements FilamentUser, ShouldRotateEncrypte
      * @var list<string>
      */
     protected $fillable = [
-        'username',
         'first_name',
         'last_name',
         'email',
@@ -41,6 +41,7 @@ class User extends Authenticatable implements FilamentUser, ShouldRotateEncrypte
      * @var list<string>
      */
     protected $hidden = [
+        'email_hash',
         'password',
         'remember_token',
     ];
@@ -53,10 +54,23 @@ class User extends Authenticatable implements FilamentUser, ShouldRotateEncrypte
     protected function casts(): array
     {
         return [
+            'first_name' => 'encrypted',
+            'last_name' => 'encrypted',
             'email' => 'encrypted',
-            'email_verified_at' => 'datetime',
+            'email_hash' => 'hashed',
             'password' => 'hashed',
+            'email_verified_at' => 'datetime',
         ];
+    }
+
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::creating(function (self $user) {
+            $user->email_hash = Hash::make($user->email);
+        });
     }
 
     /**
