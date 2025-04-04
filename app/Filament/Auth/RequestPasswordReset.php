@@ -38,6 +38,7 @@ class RequestPasswordReset extends BaseRequestPasswordReset
                 }
 
                 $notification = app(ResetPasswordNotification::class, ['token' => $token]);
+
                 $notification->url = Filament::getResetPasswordUrl($token, $user);
 
                 $user->notify($notification);

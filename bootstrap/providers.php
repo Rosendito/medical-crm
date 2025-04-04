@@ -2,6 +2,7 @@
 
 return [
     App\Providers\AppServiceProvider::class,
+    App\Providers\AuthServiceProvider::class,
     App\Providers\DependencyInjectionServiceProvider::class,
     App\Providers\Filament\CRMPanelProvider::class,
     App\Providers\MigrationsServiceProvider::class,

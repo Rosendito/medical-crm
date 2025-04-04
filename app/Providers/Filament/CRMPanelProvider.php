@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Enums\Filament\PanelIdentifier;
 use App\Filament\Auth\Login;
 use App\Filament\Auth\RequestPasswordReset;
+use App\Filament\Auth\ResetPassword;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -41,7 +42,7 @@ class CRMPanelProvider extends PanelProvider
     {
         $panel
             ->login(Login::class)
-            ->passwordReset(RequestPasswordReset::class)
+            ->passwordReset(RequestPasswordReset::class, ResetPassword::class)
             ->authMiddleware([
                 Authenticate::class,
             ]);

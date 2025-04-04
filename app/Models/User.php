@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Password;
 
 class User extends Authenticatable implements FilamentUser, HasName, ShouldRotateEncryptedAttributes
 {
@@ -138,5 +139,13 @@ class User extends Authenticatable implements FilamentUser, HasName, ShouldRotat
     public function getFilamentName(): string
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
+     * Get the email address that should be used for password resets.
+     */
+    public function getEmailForPasswordReset(): string
+    {
+        return $this->email;
     }
 }
