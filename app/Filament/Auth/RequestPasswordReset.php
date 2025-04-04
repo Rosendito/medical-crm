@@ -3,13 +3,13 @@
 namespace App\Filament\Auth;
 
 use App\Models\User;
+use App\Notifications\Auth\ResetPassword as ResetPasswordNotification;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Exception;
 use Filament\Facades\Filament;
-use Filament\Notifications\Auth\ResetPassword as ResetPasswordNotification;
 use Filament\Notifications\Notification;
 use Filament\Pages\Auth\PasswordReset\RequestPasswordReset as BaseRequestPasswordReset;
-use Password;
+use Illuminate\Support\Facades\Password;
 
 class RequestPasswordReset extends BaseRequestPasswordReset
 {
