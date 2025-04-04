@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('user_documents', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->hasTenant();
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('document_type_id')->constrained('document_types');
             $table->encryptedString('number', EncryptedColumnSize::MEDIUM);

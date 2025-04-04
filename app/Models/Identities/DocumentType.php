@@ -2,9 +2,9 @@
 
 namespace App\Models\Identities;
 
-use App\Models\Base;
+use App\Models\CommonModel;
 
-class DocumentType extends Base
+class DocumentType extends CommonModel
 {
     /**
      * The attributes that are mass assignable.

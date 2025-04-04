@@ -17,7 +17,7 @@ class UserAddressFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        return tenant_columns([
             'user_id' => User::factory(),
             'country_code' => fake()->countryCode(),
             'type' => fake()->randomElement(['home', 'work']),
@@ -28,6 +28,6 @@ class UserAddressFactory extends Factory
             'state' => fake()->state(),
             'postal_code' => fake()->postcode(),
             'is_primary' => fake()->boolean(20),
-        ];
+        ]);
     }
 }

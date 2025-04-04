@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('user_attributes', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->hasTenant();
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('attribute_definition_id')->constrained('attribute_definitions');
             $table->string('value')->nullable();

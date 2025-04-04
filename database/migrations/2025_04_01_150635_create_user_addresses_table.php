@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->hasTenant();
             $table->foreignUuid('user_id')->constrained('users');
             $table->string('country_code', 2);
             $table->string('type')->nullable();

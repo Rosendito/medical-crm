@@ -3,10 +3,10 @@
 namespace App\Models\Attributes;
 
 use App\Enums\Models\Attributes\AttributeDefinitionType;
-use App\Models\Base;
+use App\Models\CommonModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class AttributeDefinition extends Base
+class AttributeDefinition extends CommonModel
 {
     /**
      * The attributes that are mass assignable.

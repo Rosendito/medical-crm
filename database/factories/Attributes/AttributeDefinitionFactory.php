@@ -17,7 +17,7 @@ class AttributeDefinitionFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        return tenant_columns([
             'key' => fake()->unique()->slug(),
             'label' => fake()->words(2, true),
             'type' => fake()->randomElement(AttributeDefinitionType::cases()),
@@ -25,6 +25,6 @@ class AttributeDefinitionFactory extends Factory
             'is_visible' => true,
             'should_encrypt' => false,
             'regex_pattern' => null,
-        ];
+        ]);
     }
 }

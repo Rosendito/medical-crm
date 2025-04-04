@@ -18,7 +18,7 @@ class UserDocumentFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        return tenant_columns([
             'user_id' => User::factory(),
             'document_type_id' => DocumentType::factory(),
             'number' => strtoupper(fake()->bothify('??######')),
@@ -26,6 +26,6 @@ class UserDocumentFactory extends Factory
             'is_verified' => fake()->boolean(),
             'issued_at' => fake()->date(),
             'expires_at' => fake()->optional()->date(),
-        ];
+        ]);
     }
 }

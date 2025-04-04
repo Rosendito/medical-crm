@@ -2,9 +2,9 @@
 
 namespace App\Models\Socials;
 
-use App\Models\Base;
+use App\Models\CommonModel;
 
-class SocialPlatform extends Base
+class SocialPlatform extends CommonModel
 {
     /**
      * The attributes that are mass assignable.
