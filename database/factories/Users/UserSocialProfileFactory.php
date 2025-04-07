@@ -18,12 +18,12 @@ class UserSocialProfileFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        return tenant_columns([
             'user_id' => User::factory(),
             'social_platform_id' => SocialPlatform::factory(),
             'handle' => '@'.fake()->userName(),
             'url' => fake()->url(),
             'is_primary' => fake()->boolean(80),
-        ];
+        ]);
     }
 }

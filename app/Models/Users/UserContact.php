@@ -5,9 +5,9 @@ namespace App\Models\Users;
 use App\Concerns\Models\HasEncryptedAttributeRotation;
 use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Enums\Models\Users\UserContactType;
-use App\Models\Base;
+use App\Models\CommonModel;
 
-class UserContact extends Base implements ShouldRotateEncryptedAttributes
+class UserContact extends CommonModel implements ShouldRotateEncryptedAttributes
 {
     use HasEncryptedAttributeRotation;
 

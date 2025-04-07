@@ -5,11 +5,11 @@ namespace App\Models\Users;
 use App\Concerns\Models\HasEncryptedAttributeRotation;
 use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
 use App\Models\Attributes\AttributeDefinition;
-use App\Models\Base;
+use App\Models\CommonModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class UserAttribute extends Base implements ShouldRotateEncryptedAttributes
+class UserAttribute extends CommonModel implements ShouldRotateEncryptedAttributes
 {
     use HasEncryptedAttributeRotation;
 

@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('user_social_profiles', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->hasTenant();
             $table->foreignUuid('user_id')->constrained('users');
             $table->foreignUuid('social_platform_id')->constrained('social_platforms');
             $table->encryptedString('handle', EncryptedColumnSize::SMALL)->nullable();

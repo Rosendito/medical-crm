@@ -4,11 +4,13 @@ namespace App\Models\Attributes;
 
 use App\Concerns\Models\HasEncryptedAttributeRotation;
 use App\Contracts\Encryption\ShouldRotateEncryptedAttributes;
-use App\Models\Base;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class AttributeDefinitionOption extends Base implements ShouldRotateEncryptedAttributes
+class AttributeDefinitionOption extends Model implements ShouldRotateEncryptedAttributes
 {
-    use HasEncryptedAttributeRotation;
+    use HasEncryptedAttributeRotation, HasFactory, HasUuids;
 
     /**
      * The attributes that are mass assignable.

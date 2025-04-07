@@ -3,11 +3,15 @@
 namespace App\Models\Users;
 
 use App\Models\Attributes\AttributeDefinitionOption;
-use App\Models\Base;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserAttributeSelection extends Base
+class UserAttributeSelection extends Model
 {
+    use HasFactory, HasUuids;
+
     /**
      * Get the user attribute.
      *

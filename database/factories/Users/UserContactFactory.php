@@ -27,7 +27,7 @@ class UserContactFactory extends Factory
     {
         $type = fake()->randomElement(UserContactType::cases());
 
-        return [
+        return tenant_columns([
             'user_id' => User::factory(),
             'type' => $type,
             'value' => $type === UserContactType::EMAIL
@@ -38,6 +38,6 @@ class UserContactFactory extends Factory
                 : fake()->randomElement($this->phoneLabels),
             'is_primary' => fake()->boolean(30),
             'verified_at' => fake()->optional()->dateTime(),
-        ];
+        ]);
     }
 }

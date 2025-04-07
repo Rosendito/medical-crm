@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('user_contacts', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->hasTenant();
             $table->foreignUuid('user_id')->constrained('users');
             $table->string('type');
             $table->encryptedString('value', EncryptedColumnSize::MEDIUM);

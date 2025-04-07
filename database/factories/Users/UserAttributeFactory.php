@@ -18,11 +18,11 @@ class UserAttributeFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        return tenant_columns([
             'user_id' => User::factory(),
             'attribute_definition_id' => AttributeDefinition::factory(),
             'value' => fake()->word(),
             'encrypted_value' => null,
-        ];
+        ]);
     }
 }

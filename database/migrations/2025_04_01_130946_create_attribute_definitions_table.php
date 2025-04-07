@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('attribute_definitions', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->hasTenant();
             $table->string('key')->unique();
             $table->string('label');
             $table->string('type')->default(AttributeDefinitionType::SELECT);
